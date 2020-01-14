@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Tenhou Log Converter</title>
+  </head>
+  <body>
+    <h1>Tenhou Log Converter</h1>
+
+    <h3>Paifu Link</h3>
+    <form action="javascript:getXML()">
+      <input id="url" type="url" size="60" placeholder="http://tenhou.net/0/?log=2016031822gm-0009-10011-896da481&tw=2"></input>
+      <input type="submit" value="Get XML log">
+    </form>
+
+    <h3>XML Source</h3>
+    <textarea id="source" cols="70" rows="10" placeholder="Paste the XML here, looks like:&#10;&lt;mjloggm ver=&quot;2.3&quot;&gt;&lt;SHUFFLE seed=&quot;mt19937ar-sha512-n288-base64,NY//2sE5..."></textarea>
+
+    <p><button type="button" onclick="convert()">Convert</button></p>
+
+    <h3>JSON Output</h3>
+    <textarea id="output" cols="70" rows="10" readonly></textarea>
+    <p><button type="button" onclick="downloadJSON()">Save as file...</button></p>
+
+    <hr>
+    <footer>
+      <h5>Credits</h5>
+      <p>This tool is based on:</p>
+      <ul>
+        <li><a href="https://github.com/kobalab/Majiang/blob/master/src/perl/convlog.pl">convlog.pl</a> by kobalab</li>
+        <li><a href="https://fglock.github.io/Perlito/">Perlito</a> by fglock</li>
+      </ul>
+      <p>Made by <a href="https://nodocchi.moe/tenhoulog/#!&name=%E4%BA%8C%E5%AE%AE%E8%98%AD%E5%AD%90">Equim</a>.</p>
+    </body>
+
+  <script src="https://fglock.github.io/Perlito/perlito/perlito5.js"></script>
+  <script src="convlog.js"></script>
+  <script>
+    let logID = 'tenhou_log';
+
+    // https://gist.github.com/danallison/3ec9d5314788b337b682
+    function downloadString(text, fileType, fileName) {
+      var blob = new Blob([text], { type: fileType });
+
+      var a = document.createElement('a');
+      a.download = fileName;
+      a.href = URL.createObjectURL(blob);
+      a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
+    }
+
+    function getXML() {
+      const el = document.querySelector('#url')
+
+      const url = new URL(el.value)
+      logID = url.searchParams.get('log')
+
+      url.protocol = 'https'
+      url.hostname = 'tenhou.net'
+      url.pathname = '/0/log/'
+      url.search = '?' + logID
+
+      const win = window.open(url.toString(), '_blank')
+      win.focus()
+    }
+
+    function convert() {
+      const inEl = document.querySelector('#source')
+      const outEl = document.querySelector('#output')
+
+      const output = JSON.stringify(decodeTenhou(inEl.value))
+
+      outEl.value = output
+    }
+
+    function downloadJSON() {
+      const el = document.querySelector('#output')
+      if (el.value) {
+        downloadString(el.value, 'application/json', logID + '.json')
+      }
+    }
+  </script>
+</html>
