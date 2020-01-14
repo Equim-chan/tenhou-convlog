@@ -385,6 +385,7 @@ function decodeTenhou(xml) {
 			}
 		}
 
+        // I don't know why
 		if (perlObj === false) {
 			return ''
 		}

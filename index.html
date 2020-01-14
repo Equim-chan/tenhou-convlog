@@ -63,21 +63,25 @@
   <script src="https://fglock.github.io/Perlito/perlito/perlito5.js"></script>
   <script src="convlog.js"></script>
   <script>
+    'use strict'
+
     let logID = 'tenhou_log';
 
     // https://gist.github.com/danallison/3ec9d5314788b337b682
     function downloadString(text, fileType, fileName) {
-      var blob = new Blob([text], { type: fileType });
+      const blob = new Blob([text], { type: fileType });
 
-      var a = document.createElement('a');
+      const a = document.createElement('a');
       a.download = fileName;
       a.href = URL.createObjectURL(blob);
       a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
       a.style.display = "none";
+
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
+
+      setTimeout(() => URL.revokeObjectURL(a.href), 1500);
     }
 
     function getXML() {
@@ -98,10 +102,7 @@
     function convert() {
       const inEl = document.querySelector('#source')
       const outEl = document.querySelector('#output')
-
-      const output = JSON.stringify(decodeTenhou(inEl.value))
-
-      outEl.value = output
+      outEl.value = JSON.stringify(decodeTenhou(inEl.value))
     }
 
     function downloadJSON() {
