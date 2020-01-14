@@ -7,7 +7,33 @@
   <body>
     <h1>Tenhou Log Converter</h1>
 
-    <h3>Paifu Link</h3>
+    <h3>Description</h3>
+    <p lang="en">
+      This utility converts tenhou log to format <a href="http://kobalab.net/majiang/paipu.html">電脳麻将</a> can recognize, so that you can review the log with it.
+      <ol>
+        <li>Input the link of log.</li>
+        <li>Click "Get XML log". It will open another tab leading to tenhou's log content.</li>
+        <li>Select all and copy the content, and paste it to "XML Source"</li>
+        <li>Click "Convert"</li>
+        <li>Click "Save as file..."</li>
+        <li>The saved file can be imported to <a href="http://kobalab.net/majiang/paipu.html">電脳麻将</a>.</li>
+      </ol>
+    </p>
+    <p lang="zh">
+      本工具可将天凤牌谱转换成<a href="http://kobalab.net/majiang/paipu.html">電脳麻将</a>可识别的格式，以便利用其进行牌谱检讨。
+      <ol>
+        <li>输入牌谱的链接。</li>
+        <li>点 "Get XML log"，会打开另一个页面，里面是天凤格式的牌谱的内容。</li>
+        <li>全选然后复制页面的内容，粘贴到 "XML Source" 里。</li>
+        <li>点 "Convert"</li>
+        <li>点 "Save as file..."</li>
+        <li>保存的文件可以被<a href="http://kobalab.net/majiang/paipu.html">電脳麻将</a>导入</li>
+      </ol>
+    </p>
+
+    <hr>
+
+    <h3>Log Link</h3>
     <form action="javascript:getXML()">
       <input id="url" type="url" size="60" placeholder="http://tenhou.net/0/?log=2016031822gm-0009-10011-896da481&tw=2"></input>
       <input type="submit" value="Get XML log">
@@ -23,9 +49,10 @@
     <p><button type="button" onclick="downloadJSON()">Save as file...</button></p>
 
     <hr>
+
     <footer>
       <h5>Credits</h5>
-      <p>This tool is based on:</p>
+      <p>This utility is based on:</p>
       <ul>
         <li><a href="https://github.com/kobalab/Majiang/blob/master/src/perl/convlog.pl">convlog.pl</a> by kobalab</li>
         <li><a href="https://fglock.github.io/Perlito/">Perlito</a> by fglock</li>
