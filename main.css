@@ -1,0 +1,24 @@
+html {
+    background: #333;
+    color: white;
+}
+
+textarea, input , button{
+    vertical-align: text-top;
+    padding: 5px 15px;
+    background: #ccc;
+    border: 0 none;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+a {
+    outline: medium none;
+    text-decoration: none;
+    color: white;
+}
+
+/* input[type="submit"] {
+    display: block;
+} */
